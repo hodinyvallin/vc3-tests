@@ -1,7 +1,7 @@
 ## Micro-Automation Framework for VC3's Contact Form Feature
 
 > Built specifically for VC3's contact form - "Let's talk about how VC3 can help you AIM higher".
-> This framework demonstrates a reliable, maintainable approach to automated UI testing for critical lead-generation on the main website.
+> This framework demonstrates a reliable, maintainable approach to automated UI testing for critical lead-generation on VC3's main website.
 
 > **Stack:** Playwright, JavaScript, GitHub Actions, Faker.
 
@@ -9,7 +9,7 @@
 
 ### Test Coverage
 
-`getStarted.spec.js` targets the high-value contact form submission flow with these test cases:
+`contactForm.spec.js` targets the high-value contact form submission flow with these test cases:
 
 - Happy path: User can submit a contact form
 - Negative path: User receives validation message when required fields are left blank
@@ -17,13 +17,13 @@
 - Negative path: User receives validation message when phone number contains invalid characters
 - Negative path: User receives validation message when phone number is fewer than 7 digits
 
-**Note on production safety:** The final `click()` event on the "SEND MESSAGE" button is intentionally omitted in the first test to protect VC3's team from receiving automated test spam. Button availability is verified using visibility and enablement assertions.
+**Note on production safety:** The final `click()` event on the "SEND MESSAGE" button is intentionally omitted in the first test to protect VC3's team from receiving automated test spam.
 
 ---
 
 ### Page Object Model
 
-- To promote maintainability and reduce code duplication, this framework utilizes the Page Object Model design pattern.
+- To reduce code duplication, this framework utilizes the Page Object Model pattern.
 - Page element locators and user interactions (such as handling cookie banners, navigation, and form inputs) are encapsulated within a dedicated `HomePage.js` page object.
 - Test scripts focus on executing test logic and assertions, keeping them clean and readable.
 
@@ -32,16 +32,16 @@
 ### Test Data Management
 
 - To ensure test isolation and replicate real-world user behaviors, dynamic mock data is managed programmatically.
-- `contactFormData.js` exports a utility function that leverages the `faker` library to generate randomized, fresh mock data (names, emails, phone numbers, messages, etc.) at runtime.
+- `contactFormData.js` exports a helper function that leverages the `faker` library to generate randomized, fresh mock data (names, emails, phone numbers, messages, etc.) at runtime.
 - Invalid inputs used in the negative tests are declared explicitly at the test level for readability.
 
 ---
 
 ### Cross-Browser and Mobile Web Responsiveness
 
-- To maximize test coverage, the test suite executes concurrently across multiple simulated desktop and mobile environments configured in `playwright.config.js`.
+- To maximize test coverage, the test suite runs concurrently across multiple simulated desktop and mobile environments, configured in `playwright.config.js`.
 - **Desktop:** Chromium, Firefox, and WebKit.
-- **Mobile Viewports:** Mobile Chrome (emulating a Pixel 5 viewport) and Mobile Safari (emulating an iPhone 12 viewport) to verify responsive form layout and touch inputs.
+- **Mobile Viewports:** Mobile Chrome (emulating a Pixel 5 viewport) and Mobile Safari (emulating an iPhone 12 viewport).
 
 ---
 
@@ -53,7 +53,7 @@ This framework is integrated with GitHub Actions for automated continuous integr
 2. Select the "VC3 Tests" workflow from the left panel.
 3. Click on the "Run workflow" button on the top right.
 
-Note: Tests run headlessly in CI. The `workflow_dispatch` event trigger enables us to manually run tests with a click on the "Run workflow" button, and tests also run on every pull request via the same workflow.
+**Note**: The `workflow_dispatch` event trigger enables us to manually run tests with a click on the "Run workflow" button. Tests also run on every pull request via the same workflow.
 
 ---
 
