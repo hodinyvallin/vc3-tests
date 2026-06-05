@@ -94,7 +94,7 @@ To view a HTML report of the test run:
 
 ### Test Results
 
-_16 tests passed in CI:_
+_25 tests passed in CI:_
 
 <img src="./ci-results.png" alt="CI Results" width="600"/>
 
